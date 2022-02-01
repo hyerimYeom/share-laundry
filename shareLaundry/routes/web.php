@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LaundryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MainController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +20,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('main'); 
-});
+// Route::get('/', function () {
+//     return view('main'); 
+// });
+
+Route::get('/', [MainController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('main');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/laundry/{id}', [LaundryController::class, 'index']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+//id로 말고 이름으로 보여주고 싶음
+
+
 // Route::get('/using', [App\Http\Controllers\LaundryController::class, 'index'])->name('using');
 // // Route::get('/using/each', [App\Http\Controllers\LaundryController::class, 'each'])->name('each');
 // // Route::get('/user', [App\Http\Controllers\UserContollerController::class, 'index'])->name('user');
