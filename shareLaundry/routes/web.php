@@ -26,11 +26,13 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('main');
+Route::get('/user/{id}', [UserController::class, 'show']);
 
 Auth::routes();
 
-Route::get('/laundry/{id}', [LaundryController::class, 'index']);
-Route::get('/user/{id}', [UserController::class, 'show']);
+Route::resource('/laundry', LaundryController::class);
+
+
 //id로 말고 이름으로 보여주고 싶음
 
 
