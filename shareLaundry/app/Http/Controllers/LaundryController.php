@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Laundry;
 
@@ -16,7 +17,27 @@ class LaundryController extends Controller
     public function index()
     {
         // $laundry = Laundry::all();
-        $laundries = Laundry::all()->toArray();
+        // $laundries = Laundry::all()->toArray();
+        // $laundries = Laundry::select('laundry.*', 'using.*')
+        //             ->join('using', 'laundry.id', '=', 'using.laundry_id')
+        $washers = DB::table('laundry')
+                    ->selectRaw('laundry.*, using.status,using.duration_time')
+                    ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
+                    ->where('laundry.sort','=','w')
+                    ->get();
+        $dryers = DB::table('laundry')
+                    ->selectRaw('laundry.*, using.status,using.duration_time')
+                    ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
+                    ->where('laundry.sort','=','d')
+                    ->get();
+
+
+        // dd($laundries);
+        // $laundries = DB::sql(`
+        // selectfrom laundry left join using on laundry.id = using.laundry_id
+        // `)->toArray();
+
+        
         $laundries_notarr = Laundry::all();
         
         // return view('laundry.index', [
@@ -26,7 +47,8 @@ class LaundryController extends Controller
         // var_dump('------------------');
         // var_dump($laundries);
         return view('laundry.index', [
-            'laundries' => $laundries
+            'washers' => json_decode($washers, true),
+            'dryers' => json_decode($dryers, true)
         ]);
     }
 
@@ -59,8 +81,17 @@ class LaundryController extends Controller
      */
     public function show($id)
     {
-        $laundry = Laundry::find($id);
 
+
+
+        // Laundry::find($id);
+        $laundry =  DB::table('laundry')
+                    ->selectRaw('laundry.*, using.status,using.duration_time')
+                    ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
+                    ->where('laundry.id','=',$id)
+                    ->get();
+
+        $laundry = json_decode($laundry,true);
         // dd($laundry);
 
         return view('laundry.show')->with('laundry', $laundry);
