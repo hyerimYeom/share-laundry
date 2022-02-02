@@ -6,7 +6,7 @@ use App\Http\Controllers\LaundryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainController;
-
+use App\Http\Controllers\NoticeController;
 
 
 /*
@@ -20,25 +20,13 @@ use App\Http\Controllers\MainController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('main'); 
-// });
-
-Route::get('/', [MainController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index'])->name('main');
-Route::get('/user/{id}', [UserController::class, 'show']);
 
 Auth::routes();
 
+Route::resource('/', MainController::class);
+Route::resource('/login', LoginController::class);
 Route::resource('/laundry', LaundryController::class);
+Route::resource('/notice', NoticeController::class);
 
 
-//id로 말고 이름으로 보여주고 싶음
-
-
-// Route::get('/using', [App\Http\Controllers\LaundryController::class, 'index'])->name('using');
-// // Route::get('/using/each', [App\Http\Controllers\LaundryController::class, 'each'])->name('each');
-// // Route::get('/user', [App\Http\Controllers\UserContollerController::class, 'index'])->name('user');
-
-
-
+Route::get('/user/{id}', [UserController::class, 'show']);
