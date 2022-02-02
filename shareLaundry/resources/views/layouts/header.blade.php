@@ -20,6 +20,12 @@
                 <li 
                 class= "nav-item" {{ request()->is('/laundry') ? 'active' : '' }}>
                     <a class="nav-link" href="{{ url('/laundry') }}">
+                        Rooms
+                    </a>    
+                </li>
+                <li 
+                class= "nav-item" {{ request()->is('/laundry') ? 'active' : '' }}>
+                    <a class="nav-link" href="{{ url('/laundry') }}">
                         Laundry
                     </a>    
                 </li>
