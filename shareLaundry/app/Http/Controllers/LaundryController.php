@@ -46,7 +46,6 @@ class LaundryController extends Controller
      */
     public function create()
     {
-
        return view('laundry.create');
     }
 
@@ -101,7 +100,8 @@ class LaundryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $laundry = Laundry::find($id)->first();
+        return view('laundry.edit')->with('laundry', $laundry);
     }
 
     /**
@@ -113,7 +113,16 @@ class LaundryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         //create 대신 make를 쓰면 아래에 save() 사용 필
+         $laundries = Laundry::where($id)
+            ->update([ // Model을 잘 만들어놔야 가져다가 쓸 수 있음
+            'name' => $request->input('name'),
+            'brand' => $request->input('brand'),
+            'sort' => $request->input('sort'),
+            'buy_when' => $request->input('buy_when')
+        ]);
+
+        redirect('/laundry');
     }
 
     /**
