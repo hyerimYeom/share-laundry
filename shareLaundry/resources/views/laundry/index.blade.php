@@ -27,11 +27,27 @@
                         <br/>
                          세탁바구니가 더러우면, 건조기옆 수건으로 닦기
                 </ul>
-                            
-                            
-                            
+                           
             </div>
-            <div class="card-group">
+            @forelse ($laundries as $item)
+            {{-- @if ($item->sort == 'w')
+            {{ $item -> name }}
+            
+            @else
+            {{ $item -> name }}
+            
+            @endif --}}
+            <div>
+                {{ $item -> sort }}
+                {{ $item -> brand }}
+                {{ $item -> buy_when }}
+                {{ $item -> name }}
+            </div>
+            @empty
+                <p>EMpty</p>
+            @endforelse
+            {{-- 세탁실 미리보기 --}}
+            {{-- <div class="card-group">
                 @foreach($dryers as $dryer)
                 <div class="card">
                     <div class="card-header h2">
@@ -86,7 +102,7 @@
                     </div>
                 </div>
                 @endforeach
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

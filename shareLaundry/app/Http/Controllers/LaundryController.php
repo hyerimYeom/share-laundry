@@ -16,21 +16,27 @@ class LaundryController extends Controller
      */
     public function index()
     {
-        $washers = DB::table('laundry')
-                    ->selectRaw('laundry.*, using.status,using.duration_time')
-                    ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
-                    ->where('laundry.sort','=','w')
-                    ->get();
-        $dryers = DB::table('laundry')
-                    ->selectRaw('laundry.*, using.status,using.duration_time')
-                    ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
-                    ->where('laundry.sort','=','d')
-                    ->get();
 
-        return view('laundry.index', [
-            'washers' => json_decode($washers, true),
-            'dryers' => json_decode($dryers, true)
-        ]);
+        $laundries = Laundry::all();
+        // ->firstOrFail();
+        // dd($laundry);
+
+        // $washers = DB::table('laundry')
+        //             ->selectRaw('laundry.*, using.status,using.duration_time')
+        //             ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
+        //             ->where('laundry.sort','=','w')
+        //             ->get();
+        // $dryers = DB::table('laundry')
+        //             ->selectRaw('laundry.*, using.status,using.duration_time')
+        //             ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
+        //             ->where('laundry.sort','=','d')
+        //             ->get();
+
+        return view('laundry.index', ['laundries'=>$laundries]);
+        // return view('laundry.index', [
+        //     'washers' => json_decode($washers, true),
+        //     'dryers' => json_decode($dryers, true)
+        // ]);
     }
 
     /**
@@ -40,7 +46,8 @@ class LaundryController extends Controller
      */
     public function create()
     {
-       
+
+       return view('laundry.create');
     }
 
     /**
@@ -51,7 +58,21 @@ class LaundryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $laundry = new Laundry();
+        // $laundry->name = $request->input('name');
+        // $laundry->sort = $request->input('sort');
+        // $laundry->buy_when = $request->input('buy_when');
+        // $laundry->save();
+
+        //create 대신 make를 쓰면 아래에 save() 사용 필
+        $laundries = Laundry::create([ // Model을 잘 만들어놔야 가져다가 쓸 수 있음
+            'name' => $request->input('name'),
+            'brand' => $request->input('brand'),
+            'sort' => $request->input('sort'),
+            'buy_when' => $request->input('buy_when')
+        ]);
+
+        return redirect('/laundry');
     }
 
     /**
@@ -63,16 +84,13 @@ class LaundryController extends Controller
     public function show($id)
     {
         // Laundry::find($id);
-        $laundry =  DB::table('laundry')
-                    ->selectRaw('laundry.*, using.status,using.duration_time')
-                    ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
-                    ->where('laundry.id','=',$id)
-                    ->get();
+       // findOrFail() // 없으면 404페이지 return
 
-        $laundry = json_decode($laundry,true);
+        // $laundry = json_decode($laundry,true);
         // dd($laundry);
 
-        return view('laundry.show')->with('laundry', $laundry);
+        return view('laundry.show');
+        //->with('laundry', $laundry);
     }
 
     /**
