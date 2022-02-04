@@ -133,6 +133,10 @@ class LaundryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $laundry = Laundry::where($id)->first();
+
+        $laundry->delete();
+
+        return redirect('/laundry');
     }
 }
