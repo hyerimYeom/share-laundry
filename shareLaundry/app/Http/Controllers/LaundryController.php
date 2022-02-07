@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Laundry;
+use App\Models\Using;
 
 class LaundryController extends Controller
 {
@@ -14,13 +15,14 @@ class LaundryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-
-        $laundries = Laundry::all();
-        // ->firstOrFail();
-        // dd($laundry);
-
+    public function index(){
+        //using이랑 조인 해서 '사용상태' 알려줘야함
+        $laundries = Laundry::leftJoin('usings', 'usings.laundry_id','=','laundries.id')
+                    ->orderBy('sort')
+                    ->get();
+        
+        // dd($laundries);
+        
         // $washers = DB::table('laundry')
         //             ->selectRaw('laundry.*, using.status,using.duration_time')
         //             ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
@@ -33,10 +35,6 @@ class LaundryController extends Controller
         //             ->get();
 
         return view('laundry.index', ['laundries'=>$laundries]);
-        // return view('laundry.index', [
-        //     'washers' => json_decode($washers, true),
-        //     'dryers' => json_decode($dryers, true)
-        // ]);
     }
 
     /**
@@ -82,6 +80,8 @@ class LaundryController extends Controller
      */
     public function show($id)
     {
+
+        $laundry = Laundry::find($id);
         // Laundry::find($id);
        // findOrFail() // 없으면 404페이지 return
 
@@ -89,7 +89,7 @@ class LaundryController extends Controller
         // dd($laundry);
 
         return view('laundry.show');
-        //->with('laundry', $laundry);
+        //->with('laundry', $laundry); 
     }
 
     /**
