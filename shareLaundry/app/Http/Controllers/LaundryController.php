@@ -42,6 +42,9 @@ class LaundryController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * 
+     * 
+     * 기계 추가 입력시 보여지는 화면 (관리자)
      */
     public function create()
     {
@@ -53,6 +56,8 @@ class LaundryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 
+     * 기계가 더 들어온다면 필요한 기능 (관리자)
      */
     public function store(Request $request)
     {
@@ -78,6 +83,8 @@ class LaundryController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * 세탁실 내부 각 기계 페이지
      */
     public function show($id)
     {
