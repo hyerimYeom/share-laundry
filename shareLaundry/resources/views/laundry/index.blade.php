@@ -70,40 +70,7 @@
                 </div>
             </div>
         </div>
-
-    {{-- 모달 --}}
-        <div class="modal align-item-center" tabindex="-1" id="myModal">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title">세탁기 이름 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <p>사용시간</p>
-                <input type="text">
-                <p></p>
-                <button>사용하기</button>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-            </div>
-        </div>
-    {{-- 모달끝 --}}
-    </div>
-    <script>
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
-
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-        })
-
-        
-    </script>
+        @include('popup.using')
 @endauth
 @endsection
     
