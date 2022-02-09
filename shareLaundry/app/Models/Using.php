@@ -24,6 +24,9 @@ class Using extends Model
     //     'using_state' => 1
     // ];
 
+    protected $fillable = ['id', 'user_id', 'laundry_id', 'duration_time', 'status'];
+
+
     //Laundry belongs to using
     public function laundry(){
         return $this->belongsTo(Laundry::class);
