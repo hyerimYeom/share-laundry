@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Laundry;
 use App\Models\Using;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class LaundryController extends Controller
 {
@@ -16,25 +19,23 @@ class LaundryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+
+        $guest = null ;
+
+        if(Auth::guest()){
+            $guest['msg'] = '로그인이 필요합니다.';
+            $guest['url'] = './login';
+        }
+
         //using이랑 조인 해서 '사용상태' 알려줘야함
         $laundries = Laundry::leftJoin('usings', 'usings.laundry_id','=','laundries.id')
                     ->orderBy('sort')
                     ->get();
         
-        // dd($laundries);
         
-        // $washers = DB::table('laundry')
-        //             ->selectRaw('laundry.*, using.status,using.duration_time')
-        //             ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
-        //             ->where('laundry.sort','=','w')
-        //             ->get();
-        // $dryers = DB::table('laundry')
-        //             ->selectRaw('laundry.*, using.status,using.duration_time')
-        //             ->join('using', 'laundry.id', '=', 'using.laundry_id','left')
-        //             ->where('laundry.sort','=','d')
-        //             ->get();
-
-        return view('laundry.index', ['laundries'=>$laundries]);
+        return $guest ? 
+        view('popup.index',['guest' => $guest]) : 
+        view('laundry.index', ['laundries' => $laundries]);
     }
 
     /**

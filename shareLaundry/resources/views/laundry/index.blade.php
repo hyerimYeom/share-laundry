@@ -1,15 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-    @if (Auth::guest())
-    <div class="container">
-        <div>
-            로그인 우선 필요합니다
-            <a href="./login" class="btn btn-primary active" role="button" aria-pressed="true">로그인 하러 가기</a>
-        </div>
-    </div>
-    @else
+@auth
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 pb-10">
@@ -107,8 +99,11 @@
         var myInput = document.getElementById('myInput')
 
         myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
+            myInput.focus()
         })
+
+        
     </script>
-    @endif 
+@endauth
 @endsection
+    
