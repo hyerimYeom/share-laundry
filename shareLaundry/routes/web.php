@@ -24,9 +24,8 @@ use App\Http\Controllers\NoticeController;
 Auth::routes();
 
 Route::resource('/', MainController::class);
-Route::resource('/login', LoginController::class);
 Route::resource('/laundry', LaundryController::class);
 Route::resource('/notice', NoticeController::class);
 
 
-Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user');
