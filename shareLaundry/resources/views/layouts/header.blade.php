@@ -18,15 +18,9 @@
                     </a>    
                 </li>
                 <li 
-                class= "nav-item" {{ request()->is('/laundry') ? 'active' : '' }}>
-                    <a class="nav-link" href="{{ url('/laundry') }}">
+                class= "nav-item" {{ request()->is('/room') ? 'active' : '' }}>
+                    <a class="nav-link" href="{{ url('/room') }}">
                         Rooms
-                    </a>    
-                </li>
-                <li 
-                class= "nav-item" {{ request()->is('/laundry') ? 'active' : '' }}>
-                    <a class="nav-link" href="{{ url('/laundry') }}">
-                        Laundry
                     </a>    
                 </li>
                 <li 
@@ -59,6 +53,9 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./laundry">{{ __('세탁실') }}</a>
+                            <a class="dropdown-item" href="./user/{{ Auth::user()->id }}">{{ __('내계정') }}</a>
+                            <hr>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

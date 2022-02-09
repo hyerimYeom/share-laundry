@@ -21,16 +21,16 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="app">        
         {{-- header --}}
         @include('layouts.header')
         {{-- end header --}}
         <main class="py-4">
             @yield('content')
         </main>
-        {{-- footer --}}
-        @include('layouts.footer')
-        {{-- end footer --}}
     </div>
+    {{-- footer --}}
+    @include('layouts.footer')
+    {{-- end footer --}}
 </body>
 </html>
