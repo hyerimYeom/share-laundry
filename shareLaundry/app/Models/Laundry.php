@@ -17,4 +17,8 @@ class Laundry extends Model
 
     // filled 아님..! (typo로 엄청난 시간 소비;;)
     protected $fillable = ['name', 'sort', 'brand', 'buy_when'];
+
+    public function using(){
+        return $this->hasMany(Using::class);   
+    }
 }

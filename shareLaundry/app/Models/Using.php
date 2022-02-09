@@ -10,17 +10,27 @@ class Using extends Model
     use HasFactory;
 
 
-    protected $table = 'using';
+    protected $table = 'usings';
 
-    protected $primaryKey = 'using_id';
+    protected $primaryKey = 'id';
 
-    const CREATED_AT = 'creation_date';
+    // const CREATED_AT = 'creation_date';
 
-    const UPDATED_AT = 'updated_date';
+    // const UPDATED_AT = 'updated_date';
 
-    protected $attributes =[
-        'user_id' => '',
-        'laundry_id' => '',
-        'using_state' => 1
-    ]
+    // protected $attributes =[
+    //     'user_id' => '',
+    //     'laundry_id' => '',
+    //     'using_state' => 1
+    // ];
+
+    //Laundry belongs to using
+    public function laundry(){
+        return $this->belongsTo(Laundry::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }
