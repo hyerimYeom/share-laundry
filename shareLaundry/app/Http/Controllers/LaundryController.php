@@ -30,8 +30,15 @@ class LaundryController extends Controller
         //using이랑 조인 해서 '사용상태' 알려줘야함
         $laundries = Laundry::leftJoin('usings', 'usings.laundry_id','=','laundries.id')
                     ->orderBy('sort')
-                    ->get();
-        
+                    ->get([
+                        'laundries.id',
+                        'laundries.name',
+                        'laundries.sort',
+                        'usings.user_id',
+                        'usings.status',
+                        'usings.duration_time'
+                    ]);
+        // dd($laundries);
         
         return $guest ? 
         view('popup.index',['guest' => $guest]) : 
@@ -88,16 +95,21 @@ class LaundryController extends Controller
      */
     public function show($id)
     {
-
-        $laundry = Laundry::find($id);
-        // Laundry::find($id);
-       // findOrFail() // 없으면 404페이지 return
-
-        // $laundry = json_decode($laundry,true);
-        // dd($laundry);
-
-        return view('laundry.show');
-        //->with('laundry', $laundry); 
+        $laundry = Laundry::leftJoin('usings', 'usings.laundry_id','=','laundries.id')
+        ->orderBy('sort')
+        ->where('laundries.id', $id)
+        ->get([
+            'laundries.id',
+            'laundries.name',
+            'laundries.sort',
+            'usings.user_id',
+            'usings.status',
+            'usings.duration_time'
+        ])
+        ;
+       
+        return view('laundry.show',['laundry' => $laundry]);
+        
     }
 
     /**

@@ -3,7 +3,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <p>show page</p>
             @foreach($laundry as $item)  
                 <h1>{{ $item['machine_name'] }}</h1>
                 @if ($item['status'] == 1)
