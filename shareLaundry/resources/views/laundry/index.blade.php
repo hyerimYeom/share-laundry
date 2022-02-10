@@ -36,11 +36,11 @@
                                 @if($item['status'] !== 1)
                                     {{-- 만약에 나라면? 취소 버튼 보여주기 ! --}}
                                     {{-- 시간 완료 되었을 경우, 시간 체크해서 5분후에 완료시키기--}}
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" id="myInput{{ $item['id'] }}" data-index-number={{$item['id'] }}>
                                         사용
                                     </button>
                                 @elseif($item->user_id == Auth::user()->id)
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal"  id="myInput{{ $item['id'] }}" data-index-number="{{ $item['id'] }}">
                                         취소
                                     </button>
                                 @endif
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>
