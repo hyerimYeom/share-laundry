@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\UsingController;
 
 
 /*
@@ -26,6 +27,7 @@ Auth::routes();
 Route::resource('/', MainController::class);
 Route::resource('/laundry', LaundryController::class);
 Route::resource('/notice', NoticeController::class);
+Route::resource('/using', UsingController::class);
 
 
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user');

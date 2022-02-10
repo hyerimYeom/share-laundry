@@ -25,7 +25,7 @@ class UsingController extends Controller
      */
     public function create()
     {
-        //
+        dd('ok');
     }
 
     /**
@@ -36,7 +36,16 @@ class UsingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd('OKstore');
+
+        $usings = Using::create([ 
+            'user_id'=> $request->input('user_id'),
+            'laundry_id'=> $request->input('laundry_id'),
+            'duration_time'=> $request->input('duration_time'),
+            'status'=> $request->input('status')
+        ]);
+        
+        return redirect('/laundry');
     }
 
     /**

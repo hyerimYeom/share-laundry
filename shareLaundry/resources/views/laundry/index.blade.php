@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        @include('popup.using')
+        @include('using.create')
 @endauth
 @endsection
     

@@ -7,6 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <form action="./using" method="POST">
+                    @csrf
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="status" value="1">
                 <input type="hidden" name="laundry_id" value="">
@@ -19,8 +21,9 @@
             </div>
             <div class="modal-footer d-flex justify-content-between">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary">사용하기</button>
+                <button class="btn btn-primary" type="submit">사용하기</button>
             </div>
+        </form>
         </div>  
     </div>
 </div>
