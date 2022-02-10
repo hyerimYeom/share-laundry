@@ -28,8 +28,19 @@ class LaundryController extends Controller
         }
 
         //using이랑 조인 해서 '사용상태' 알려줘야함
+        // select laundries.id
+        // ,laundries.name
+        // ,laundries.sort
+        // ,usings.user_id
+        // ,usings.status
+        // ,usings.duration_time
+        // from laundries 
+        // left join usings 
+        // on usings.laundry_id = laundries.id
+        // order by laundries.name asc
+
         $laundries = Laundry::leftJoin('usings', 'usings.laundry_id','=','laundries.id')
-                    ->orderBy('sort')
+                    ->orderBy('laundries.name', 'asc')
                     ->get([
                         'laundries.id',
                         'laundries.name',
