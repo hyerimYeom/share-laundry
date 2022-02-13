@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <p>역삼스테이 여성전용 2호점 쉐어하우스</p>
-            <p>소개글</p>
+            {{-- <p>역삼스테이 여성전용 2호점 쉐어하우스</p> --}}
+            {{-- <p>소개글</p> --}}
             
             <div>
                 <div>

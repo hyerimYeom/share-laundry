@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{-- {{ config('app.name', 'Laravel') }} --}}
-            역삼스테이 1호점 (여성전용)
+            {{ config('app.name', '역삼스테이 1호점 (여성전용)') }}
+            {{-- 역삼스테이 1호점 (여성전용) --}}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
