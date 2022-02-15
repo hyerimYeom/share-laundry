@@ -79,16 +79,24 @@ class UsingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $usings = Using::where($id)
+        //기존 데이터 불러오기?
+
+        //수정
+        $using = Using::where($id)
             ->update([ // Model을 잘 만들어놔야 가져다가 쓸 수 있음
                 // 'id'=> $request->input('id'),
-                'user_id'=> $request->input('user_id'),
-                'laundry_id'=> $request->input('laundry_id'),
-                'duration_time'=> $request->input('duration_time'),
+                // 'user_id'=> $request->input('user_id'),
+                // 'laundry_id'=> $request->input('laundry_id'),
+                // 'duration_time'=> $request->input('duration_time') ? $request->input('duration_time') : null ,
                 'status'=> $request->input('status')
             ]);
 
+        if(!$using){
+            //원래 데이터로 롤백
+        }
+
         redirect('/laundry');
+        //성공여부 넘겨주기 ! (-> 결과값에 따라 각 팝업결과 다름 ?  "성공하였습니다" : "실패하였습니다!")
     }
 
     /**
