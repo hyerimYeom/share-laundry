@@ -129,16 +129,11 @@ class UsingController extends Controller
                 'status'=> 9
             ]);
 
-        dd(
-        $using
-        );
-
-        if(!$using){
+        if($using !== 1){
             //원래 데이터로 롤백
-            
+            $result = '실패하였습니다.';
         }
 
-        // dd($using);
 
         return redirect('/laundry');
         //성공여부 넘겨주기 ! (-> 결과값에 따라 각 팝업결과 다름 ?  "성공하였습니다" : "실패하였습니다!")
