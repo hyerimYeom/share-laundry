@@ -23,11 +23,11 @@ use App\Http\Controllers\UsingController;
 
 
 Auth::routes();
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user');
+Route::get('/using/cancel/{id}', [UsingController::class, 'cancel'])->name('cancel', 'cancel');
 
 Route::resource('/', MainController::class);
 Route::resource('/laundry', LaundryController::class);
 Route::resource('/notice', NoticeController::class);
 Route::resource('/using', UsingController::class);
 
-
-Route::get('/user/{id}', [UserController::class, 'show'])->name('user');

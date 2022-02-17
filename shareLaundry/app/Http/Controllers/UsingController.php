@@ -93,6 +93,7 @@ class UsingController extends Controller
 
         if(!$using){
             //원래 데이터로 롤백
+            
         }
 
         redirect('/laundry');
@@ -108,5 +109,38 @@ class UsingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel($using_id)
+    {
+
+        // dd($id);
+         //기존 데이터 불러오기?
+
+        //수정
+        $using = Using::where('id', $using_id)
+            ->update([ 
+                'status'=> 9
+            ]);
+
+        dd(
+        $using
+        );
+
+        if(!$using){
+            //원래 데이터로 롤백
+            
+        }
+
+        // dd($using);
+
+        return redirect('/laundry');
+        //성공여부 넘겨주기 ! (-> 결과값에 따라 각 팝업결과 다름 ?  "성공하였습니다" : "실패하였습니다!")
     }
 }

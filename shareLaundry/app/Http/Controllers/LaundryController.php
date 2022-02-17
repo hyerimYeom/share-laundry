@@ -45,6 +45,7 @@ class LaundryController extends Controller
                         'laundries.id',
                         'laundries.name',
                         'laundries.sort',
+                        'usings.id as using_id',
                         'usings.user_id',
                         'usings.status',
                         'usings.duration_time'
@@ -113,11 +114,11 @@ class LaundryController extends Controller
             'laundries.id',
             'laundries.name',
             'laundries.sort',
+            'usings.id as using_id',
             'usings.user_id',
             'usings.status',
             'usings.duration_time'
-        ])
-        ;
+        ]);
        
         return view('laundry.show',['laundry' => $laundry]);
         

@@ -40,9 +40,9 @@
                                         사용
                                     </button>
                                 @elseif($item->user_id == Auth::user()->id)
-                                    <a href="./using/" class="btn btn-danger" id="myInput{{ $item['id'] }}" data-index-number="{{ $item['id'] }}" >
+                                    <a href="./using/cancel/{{ $item['using_id'] }}" class="btn btn-danger">
                                         취소
-                                    </a ">
+                                    </a>
                                 @endif
                             </div>
                             <div class="card-body">
