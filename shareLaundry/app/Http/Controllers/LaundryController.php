@@ -27,31 +27,35 @@ class LaundryController extends Controller
             $guest['url'] = './login';
         }
 
-        //using이랑 조인 해서 '사용상태' 알려줘야함
-        // select laundries.id
-        // ,laundries.name
-        // ,laundries.sort
-        // ,usings.user_id
-        // ,usings.status
-        // ,usings.duration_time
-        // from laundries 
-        // left join usings 
-        // on usings.laundry_id = laundries.id
-        // order by laundries.name asc
-
-        $laundries = Laundry::leftJoin('usings', 'usings.laundry_id','=','laundries.id')
-                    ->orderBy('laundries.name', 'asc')
-                    ->get([
-                        'laundries.id',
-                        'laundries.name',
-                        'laundries.sort',
-                        'usings.id as using_id',
-                        'usings.user_id',
-                        'usings.status',
-                        'usings.duration_time'
-                    ]);
-        // dd($laundries);
+        // $recenUsings = Using::all()->where();
         
+        
+        $getRecentUsing = Using::select('laundry_id', DB::raw('MAX(created_at) as created_at'))->groupBy('laundry_id')->get();
+        
+         foreach ($getRecentUsing as $item){
+             $usingLaundryId[] = $item->laundry_id;
+             $usingCreatedAt[] = (string)$item->created_at;
+         }
+
+        $usingRecent = Using::select('*')->whereIn('laundry_id',$usingLaundryId)->whereIn('created_at', $usingCreatedAt);
+        
+        
+        $laundries = 
+        Laundry::leftJoinSub($usingRecent, 'usings', function($join){
+            $join->on('usings.laundry_id', '=', 'laundries.id');
+        })
+        ->orderBy('laundries.name')
+        ->get([
+            'laundries.id',
+            'laundries.name',
+            'laundries.sort',
+            'usings.created_at',
+            'usings.id as using_id',
+            'usings.user_id',
+            'usings.status',
+            'usings.duration_time'
+        ]);
+
         return $guest ? 
         view('popup.index',['guest' => $guest]) : 
         view('laundry.index', ['laundries' => $laundries]);

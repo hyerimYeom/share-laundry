@@ -24,7 +24,7 @@ class Using extends Model
     //     'using_state' => 1
     // ];
 
-    protected $fillable = ['id', 'user_id', 'laundry_id', 'duration_time', 'status'];
+    protected $fillable = ['id', 'user_id', 'laundry_id', 'duration_time', 'status','created_at', 'updated_at'];
 
 
     //Laundry belongs to using
